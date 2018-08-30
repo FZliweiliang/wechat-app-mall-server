@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node app.js",
-    "stop": "forever stop app",
-    "start": "forever start app"
+    "dev": "node app.js"
   },
   "author": "",
   "license": "MIT",

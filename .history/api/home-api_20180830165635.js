@@ -17,13 +17,7 @@ exports.getBannerList = (req, res) => {
 	var list=[{'img':'https://wx.yogalt.com/file/images/banner.jpg'},{'img':'https://wx.yogalt.com/file/images/banner2.jpg'}]
     res.send(list)
 }
-/**
- * 前台获得推荐列表
- * @method
- * @param  {[type]} req [description]
- * @param  {[type]} res [description]
- * @return {[type]}     [description]
- */
+
 exports.getHotList = (req, res) => {
     var list=[{ //商品列表
         id: 2,

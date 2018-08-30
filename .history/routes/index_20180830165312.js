@@ -17,7 +17,7 @@ router.get('/v1/home/hotList',homeApi.getHotList) //获取推荐列表
 router.get('*', (req, res) => {
     res.json({
         code: -200,
-        message: '没有找到该接口'
+        message: '没有找到该页面'
     })
 })
 
