@@ -198,12 +198,11 @@ exports.getItem = (req, res) => {
   }
   Promise.all([Article.findOneAsync({ _id, is_delete: 0 }), Article.updateAsync({ _id }, { $inc: { visit: 1 } })])
       .then(value => {
-          console.log(value)
           let json
           if (!value[0]) {
               json = {
                   code: -200,
-                  message: '没有找到该商品'
+                  message: '没有找到该文章'
               }
           } else {
               if (user_id) value[0]._doc.like_status = value[0].likes && value[0].likes.indexOf(user_id) > -1

@@ -18,8 +18,7 @@ var ArticleSchema = new Schema({
     creat_date: String,
     update_date: String,
     is_delete: Number,
-    timestamp: Number,
-    is_hot:Boolean
+    timestamp: Number
 })
 
 var Article = mongoose.model('Article', ArticleSchema)

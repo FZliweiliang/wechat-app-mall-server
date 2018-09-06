@@ -198,7 +198,6 @@ exports.getItem = (req, res) => {
   }
   Promise.all([Article.findOneAsync({ _id, is_delete: 0 }), Article.updateAsync({ _id }, { $inc: { visit: 1 } })])
       .then(value => {
-          console.log(value)
           let json
           if (!value[0]) {
               json = {

@@ -13,7 +13,6 @@
   "license": "MIT",
   "dependencies": {
     "connect-multiparty": "^2.1.1",
-    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "marked": "^0.5.0",
     "moment": "^2.22.2",

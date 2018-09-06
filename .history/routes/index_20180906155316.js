@@ -15,11 +15,9 @@ router.get('/v1/home/getHotList',homeApi.getHotList) //获取推荐列表
 
 router.get('/v1/home/getList',homeApi.getList) //获取列表
 
-router.get('/v1/home/getItem',homeApi.getItem) //获取详情
-
 router.post('/v1/admin/addItem',intercept.admin,multipartMiddleware,adminApi.addItem) //添加商品
 
-router.get('/v1/admin/delItem', intercept.admin,adminApi.delItem) //删除商品
+router.get('/backend/article/delete', intercept.admin, backendArticle.deletes) //删除商品
 
 // ------- 分类 -------
 // 管理时, 获取分类列表

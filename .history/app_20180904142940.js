@@ -2,15 +2,6 @@ const express = require('express');
 const fs = require('fs')
 const app = express();
 
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-
-// body 解析中间件
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-// cookie 解析中间件
-app.use(cookieParser())
-
 //图片文件
 app.get('/file/images/*', function (req, res) {
     res.sendFile( __dirname + "/" + req.url );

@@ -47,7 +47,7 @@ exports.getHotList = (req, res) => {
   }
 
   const filds =
-      'title content category category_name visit like img spec price num likes is_hot comment_count creat_date update_date is_delete timestamp'
+      'title content category category_name visit like likes comment_count creat_date update_date is_delete timestamp'
 
   Promise.all([
       Article.find(data, filds)
@@ -58,6 +58,7 @@ exports.getHotList = (req, res) => {
       Article.countAsync(data)
   ])
       .then(([data, total]) => {
+          // console.log(data, total)
           const totalPage = Math.ceil(total / limit)
           const user_id = req.cookies.userid || req.headers.userid
           const json = {
@@ -71,7 +72,7 @@ exports.getHotList = (req, res) => {
           if (user_id) {
               data = data.map(item => {
                   item._doc.like_status = item.likes && item.likes.indexOf(user_id) > -1
-                  item.content = item.content
+                  item.content = item.content.substring(0, 500) + '...'
                   item.likes = []
                   return item
               })
@@ -80,7 +81,7 @@ exports.getHotList = (req, res) => {
           } else {
               data = data.map(item => {
                   item._doc.like_status = false
-                  item.content = item.content
+                  item.content = item.content.substring(0, 500) + '...'
                   item.likes = []
                   return item
               })
@@ -198,12 +199,11 @@ exports.getItem = (req, res) => {
   }
   Promise.all([Article.findOneAsync({ _id, is_delete: 0 }), Article.updateAsync({ _id }, { $inc: { visit: 1 } })])
       .then(value => {
-          console.log(value)
           let json
           if (!value[0]) {
               json = {
                   code: -200,
-                  message: '没有找到该商品'
+                  message: '没有找到该文章'
               }
           } else {
               if (user_id) value[0]._doc.like_status = value[0].likes && value[0].likes.indexOf(user_id) > -1
