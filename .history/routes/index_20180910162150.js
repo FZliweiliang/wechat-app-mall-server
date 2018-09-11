@@ -1,0 +1,46 @@
+const express = require('express')
+const router = express.Router()
+const multipart = require('connect-multiparty')
+const multipartMiddleware = multipart()
+const intercept = require('../routes/intercept')
+
+const homeApi = require('../api/home-api.js')
+const adminApi = require('../api/admin-api.js')
+// const publicApi = require('../api/public-api.js')
+const userApi = require('../api/user-api.js')
+
+// ------- 首页 -------
+router.get('/v1/home/bannerList',homeApi.getBannerList) //获取轮播图
+
+router.get('/v1/home/getHotList',homeApi.getHotList) //获取推荐列表
+
+router.get('/v1/home/getList',homeApi.getList) //获取列表
+
+router.get('/v1/home/getItem',homeApi.getItem) //获取详情
+
+router.post('/v1/admin/addItem',intercept.admin,multipartMiddleware,adminApi.addItem) //添加商品
+
+router.get('/v1/admin/delItem', intercept.admin,adminApi.delItem) //删除商品
+
+// ------- 分类 -------
+router.post('/v1/admin/addClass',intercept.admin,adminApi.addClass) //添加分类
+
+router.get('/v1/admin/getClassList',intercept.admin,adminApi.getClassList) //获取分类列表
+
+router.get('/v1/admin/delClass',intercept.admin,adminApi.delClass) //删除分类
+
+// ------- 微信 -------
+router.get('/v1/wx/getUser',userApi.getWxUser) //获取用户信息
+
+// ------- 用户 -------
+router.get('/v1/user/bindMobile',userApi.bindMobile) //获取用户信息
+
+
+router.get('*', (req, res) => {
+    res.json({
+        code: -200,
+        message: '没有找到该接口'
+    })
+})
+
+module.exports = router
