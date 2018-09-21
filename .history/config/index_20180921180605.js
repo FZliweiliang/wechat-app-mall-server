@@ -1,0 +1,2 @@
+exports.AppID = ""
+exports.Secret = ""

@@ -3,7 +3,6 @@ var Schema = mongoose.Schema
 var Promise = require('bluebird')
 
 var LikeSchema = new Schema({
-    
     article_id: String,
     user_id: String,
     creat_date: String,
