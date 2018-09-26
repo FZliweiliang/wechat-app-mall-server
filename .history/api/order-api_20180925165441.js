@@ -19,9 +19,7 @@ exports.addCart = (req,res) => {
         spec,
         title,
         img,
-        price,
-        category
-        } = req.body
+        price} = req.body
 
     Cart.find({openid},{'goodsList':{$elemMatch:{"id":id}}})
     .then(result=>{
@@ -41,7 +39,7 @@ exports.addCart = (req,res) => {
                 })
             })
         }else{
-            Cart.updateAsync({openid},{'$push':{"goodsList":{id,num,spec,title,img,price,category}}})
+            Cart.updateAsync({openid},{'$push':{"goodsList":{id,num,spec,title,img,price}}})
             .then(result=>{
                 res.json({
                     code: 200,
@@ -159,7 +157,6 @@ exports.setOrder = (req,res) => {
 
     let totalPrice = 0
     let costPrice = 0
-    
     goods.map((v,k)=>{
         goodsId.push(v.id)
     })
@@ -183,7 +180,7 @@ exports.setOrder = (req,res) => {
 
         data.totalPrice = totalPrice.toFixed(2)
         data.costPrice = costPrice.toFixed(2)
-
+        
         Order.createAsync(data).then(result=>{
             res.json({
                 code: 200,

@@ -159,7 +159,6 @@ exports.setOrder = (req,res) => {
 
     let totalPrice = 0
     let costPrice = 0
-    
     goods.map((v,k)=>{
         goodsId.push(v.id)
     })

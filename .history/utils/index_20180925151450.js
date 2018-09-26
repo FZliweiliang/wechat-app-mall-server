@@ -34,5 +34,6 @@ exports.removeProperty = (object)=>{
             delete object[prop]
         }
     }
+    console.log(abc)
 }
 

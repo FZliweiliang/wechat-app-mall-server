@@ -3,7 +3,6 @@ const mongoose = require('../mongoose')
 const Cart = mongoose.model('Cart')
 const Article = mongoose.model('Article')
 const Order = mongoose.model('Order')
-const { removeProperty } = require('../utils')
 /**
  * 加入购物车
  * @method
@@ -19,9 +18,7 @@ exports.addCart = (req,res) => {
         spec,
         title,
         img,
-        price,
-        category
-        } = req.body
+        price} = req.body
 
     Cart.find({openid},{'goodsList':{$elemMatch:{"id":id}}})
     .then(result=>{
@@ -41,7 +38,7 @@ exports.addCart = (req,res) => {
                 })
             })
         }else{
-            Cart.updateAsync({openid},{'$push':{"goodsList":{id,num,spec,title,img,price,category}}})
+            Cart.updateAsync({openid},{'$push':{"goodsList":{id,num,spec,title,img,price}}})
             .then(result=>{
                 res.json({
                     code: 200,
@@ -159,7 +156,6 @@ exports.setOrder = (req,res) => {
 
     let totalPrice = 0
     let costPrice = 0
-    
     goods.map((v,k)=>{
         goodsId.push(v.id)
     })
@@ -174,16 +170,14 @@ exports.setOrder = (req,res) => {
             })
         })
 
-        if(totalPrice > 98){ //满99包邮
+        if(data.totalPrice > 98){ //满99包邮
             data.freight = 0
         }else{
             data.freight = 8
             totalPrice + data.freight
         }
-
         data.totalPrice = totalPrice.toFixed(2)
         data.costPrice = costPrice.toFixed(2)
-
         Order.createAsync(data).then(result=>{
             res.json({
                 code: 200,
@@ -280,8 +274,6 @@ exports.updateOrder = (req,res) => {
         update_date: moment().format('YYYY-MM-DD HH:mm:ss'),
     }
 
-    removeProperty(data)
-
     Cart.updateAsync({_id:id},{data})
     .then(result=>{
         res.json({
@@ -289,6 +281,7 @@ exports.updateOrder = (req,res) => {
             data: result
         })
     })
+
     .catch(err => {
         res.json({
             code: -200,
