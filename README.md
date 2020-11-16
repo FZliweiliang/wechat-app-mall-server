@@ -15,7 +15,7 @@ MongoDB 3.2.7
 
 ## 说明
 ```
->  如有问题或者遇到坑请直接在 Issues 中提，或者可以加我的QQ 212181324
+>  如有问题或者遇到坑请直接在 Issues 中提
 
 >  如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
@@ -102,9 +102,3 @@ MongoDB 3.2.7
 | /v1/order/delIetm   | get        | auto | 删除商品 |
 | /v1/order/editCart   | post        | auto | 编辑购物车 |
 
-## 支持作者
-```
->  请作者喝瓶肥宅快乐水
-```
-<img src="https://github.com/474782977/wechat-app-mall/blob/master/screenshot/zfb.jpg" width="320px" style="display:inline;">
-<img src="https://github.com/474782977/wechat-app-mall/blob/master/screenshot/wx.png" width="320px" style="display:inline;">
